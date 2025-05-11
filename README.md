@@ -1,7 +1,6 @@
 - 👋 Hi, I’m @rlac9
 - 👀 I’m interested in network, ai, programming
 - 🌱 I’m currently learning python
-- 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me gmail:rlacodnjs091021@gmail.com
 
 <!---
