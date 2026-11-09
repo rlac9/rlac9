@@ -1,91 +1,179 @@
 {
-  "title": "파이썬 입문 학습 로드맵 (샘플)",
+  "title": "화이트햇(정보보안) 학습 로드맵",
   "pass_score": 70,
   "stages": [
     {
       "id": 1,
-      "name": "1단계: 기초 문법",
+      "name": "1단계: 컴퓨터 기초",
       "topics": [
         {
-          "id": "variables",
-          "title": "변수와 자료형",
+          "id": "linux-basics",
+          "title": "리눅스 기본",
           "goals": [
-            "정수, 실수, 문자열, 불리언 자료형 구분하기",
-            "변수에 값을 저장하고 출력하기(print)",
-            "type()로 자료형 확인하기",
-            "f-문자열로 값 끼워 넣기"
+            "파일·디렉터리 명령어(ls, cd, cp, mv, rm, find)",
+            "파일 권한(chmod, chown)과 사용자·그룹 개념",
+            "파이프(|)와 리다이렉션(>, >>)",
+            "프로세스 확인·종료(ps, kill)"
           ],
           "resources": [
-            "점프 투 파이썬 2장: https://wikidocs.net/book/1",
-            "변수 5개를 만들어 서로 다른 자료형을 담아 보기"
+            "OverTheWire Bandit (합법적인 연습용 워게임): https://overthewire.org/wargames/bandit/",
+            "매일 새 명령어 5개를 직접 실행해 메모하기"
           ]
         },
         {
-          "id": "control-flow",
-          "title": "조건문과 반복문",
+          "id": "networking",
+          "title": "네트워크 기초",
           "goals": [
-            "if / elif / else 로 분기하기",
-            "for 문으로 리스트 순회하기",
-            "while 문과 break, continue",
-            "range() 활용하기"
+            "OSI 7계층과 TCP/IP 4계층",
+            "IP 주소·서브넷·포트의 의미",
+            "TCP 3-way handshake와 UDP의 차이",
+            "DNS, HTTP/HTTPS가 동작하는 흐름"
           ],
           "resources": [
-            "점프 투 파이썬 3장",
-            "1부터 100까지 중 짝수만 출력하는 프로그램 짜 보기"
+            "TryHackMe 'Pre Security' 경로: https://tryhackme.com",
+            "Wireshark로 '내' 컴퓨터의 HTTP 요청을 관찰해 보기"
+          ]
+        },
+        {
+          "id": "python-for-security",
+          "title": "보안을 위한 파이썬",
+          "goals": [
+            "변수·조건문·반복문·함수",
+            "파일 읽기·쓰기와 예외 처리",
+            "requests 라이브러리로 HTTP 요청 보내기",
+            "간단한 스크립트로 반복 작업 자동화하기"
+          ],
+          "resources": [
+            "점프 투 파이썬: https://wikidocs.net/book/1",
+            "이 저장소의 claude-agent 코드를 읽으며 구조 파악하기"
           ]
         }
       ]
     },
     {
       "id": 2,
-      "name": "2단계: 자료 구조와 함수",
+      "name": "2단계: 보안 기초와 윤리",
       "topics": [
         {
-          "id": "data-structures",
-          "title": "리스트·딕셔너리",
+          "id": "ethics-and-law",
+          "title": "해킹의 윤리와 법 (가장 먼저!)",
           "goals": [
-            "리스트 추가/삭제/인덱싱/슬라이싱",
-            "딕셔너리 key-value 다루기",
-            "리스트 컴프리헨션 기초",
-            "언제 리스트와 딕셔너리를 쓰는지"
+            "허가 없는 접근·테스트가 왜 범죄인지 (정보통신망법 등)",
+            "화이트햇과 블랙햇의 차이, 책임 있는 공개(Responsible Disclosure)",
+            "버그바운티·CTF 같은 합법적 연습 경로 구분하기",
+            "테스트 전 '서면 허가(Rules of Engagement)'의 중요성"
           ],
           "resources": [
-            "점프 투 파이썬 2장 (리스트/딕셔너리)",
-            "학생 이름과 점수를 딕셔너리로 저장해 보기"
+            "KISA / KrCERT: https://www.krcert.or.kr",
+            "참여하는 모든 플랫폼의 이용 규칙을 먼저 읽는 습관"
           ]
         },
         {
-          "id": "functions",
-          "title": "함수",
+          "id": "crypto-basics",
+          "title": "암호학 기초",
           "goals": [
-            "def 로 함수 정의하기",
-            "매개변수와 반환값(return)",
-            "기본값 인자",
-            "함수를 작은 단위로 나누는 이유"
+            "대칭키와 공개키 암호의 차이",
+            "해시 함수(SHA-256)의 용도와 단방향성",
+            "인코딩(Base64)과 암호화의 차이",
+            "비밀번호를 안전하게 저장하는 방법(솔트, bcrypt)"
           ],
           "resources": [
-            "점프 투 파이썬 4장",
-            "이 저장소의 claude-agent/tools.py 에서 함수들이 어떻게 쓰였는지 읽어 보기"
+            "CryptoHack (학습용): https://cryptohack.org",
+            "picoCTF의 Cryptography 입문 문제: https://picoctf.org"
+          ]
+        },
+        {
+          "id": "auth-and-session",
+          "title": "인증과 세션 개념",
+          "goals": [
+            "쿠키와 세션이 동작하는 방식",
+            "JWT의 구조와 쓰임",
+            "다중 인증(MFA)이 보안을 높이는 이유",
+            "흔한 인증 설계 실수와 올바른 방어"
+          ],
+          "resources": [
+            "PortSwigger Web Security Academy - Authentication: https://portswigger.net/web-security"
           ]
         }
       ]
     },
     {
       "id": 3,
-      "name": "3단계: 실전",
+      "name": "3단계: 웹 취약점의 원리와 방어",
       "topics": [
         {
-          "id": "files-and-modules",
-          "title": "파일과 모듈",
+          "id": "owasp-top10",
+          "title": "OWASP Top 10 이해",
           "goals": [
-            "open() 으로 파일 읽고 쓰기",
-            "import 로 모듈 가져오기",
-            "표준 라이브러리(json, pathlib) 맛보기",
-            "예외 처리(try/except)"
+            "OWASP Top 10 각 항목이 무엇인지 설명하기",
+            "각 취약점이 '왜' 생기는지(근본 원인) 이해하기",
+            "개발자 관점에서 각각을 어떻게 막는지",
+            "연습용 랩(OWASP Juice Shop)을 내 컴퓨터에 설치해 보기"
           ],
           "resources": [
-            "점프 투 파이썬 5장",
-            "이 폴더의 study_tools.py 가 json 파일을 어떻게 읽고 쓰는지 읽어 보기"
+            "OWASP Top 10: https://owasp.org/www-project-top-ten/",
+            "OWASP Juice Shop을 로컬에 설치해 안전하게 연습: https://owasp.org/www-project-juice-shop/"
+          ]
+        },
+        {
+          "id": "sql-injection",
+          "title": "SQL 인젝션: 원리와 방어",
+          "goals": [
+            "입력값이 쿼리에 섞일 때 문제가 생기는 원리",
+            "왜 위험한지(데이터 노출)와 영향 범위",
+            "Prepared Statement(파라미터 바인딩)로 막는 방법",
+            "방어가 되어 있는지 코드에서 확인하는 법"
+          ],
+          "resources": [
+            "PortSwigger Academy - SQL injection (연습용 랩 포함)",
+            "DVWA(Damn Vulnerable Web App)를 로컬에 설치해 실습"
+          ]
+        },
+        {
+          "id": "xss",
+          "title": "XSS: 원리와 방어",
+          "goals": [
+            "Reflected / Stored / DOM XSS의 차이",
+            "출력 인코딩과 CSP로 방어하는 방법",
+            "쿠키의 HttpOnly 속성이 하는 일",
+            "프레임워크가 기본으로 막아 주는 부분과 아닌 부분"
+          ],
+          "resources": [
+            "PortSwigger Academy - Cross-site scripting (연습용 랩)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "4단계: 실전 연습 (합법적 환경)",
+      "topics": [
+        {
+          "id": "ctf-practice",
+          "title": "CTF로 실력 쌓기",
+          "goals": [
+            "CTF가 무엇이고 어떤 분야(웹/암호/포너블/포렌식)가 있는지",
+            "picoCTF 같은 입문 CTF 문제 꾸준히 풀기",
+            "풀이 과정을 글(write-up)로 정리하는 습관",
+            "모르는 문제를 공식 해설과 비교하며 복습하기"
+          ],
+          "resources": [
+            "picoCTF: https://picoctf.org",
+            "TryHackMe / Hack The Box의 입문 경로 (허가된 연습 환경)"
+          ]
+        },
+        {
+          "id": "bug-bounty-intro",
+          "title": "버그바운티 입문",
+          "goals": [
+            "버그바운티가 '허가된' 취약점 신고 제도라는 점 이해",
+            "프로그램의 범위(scope)와 규칙을 반드시 지키기",
+            "좋은 취약점 리포트를 쓰는 법",
+            "중복·범위 밖 신고를 피하는 법"
+          ],
+          "resources": [
+            "각 기업·기관의 공식 버그바운티 정책 문서 읽기",
+            "범위를 벗어난 테스트는 절대 하지 않기 (불법)"
           ]
         }
       ]
