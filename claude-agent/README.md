@@ -31,6 +31,10 @@ Anthropic의 공식 Python SDK(`anthropic`)로 **도구를 사용하는 Claude �
 | `agent.py` | 메인 에이전트. 터미널에서 대화합니다. SDK의 **Tool Runner**가 반복을 자동 처리 |
 | `tools.py` | 에이전트가 쓰는 도구들 (계산기, 현재 시각, 파일 목록, 파일 읽기) |
 | `manual_loop.py` | 학습용: 반복(loop)을 **직접** 구현한 예제 |
+| `study_coach.py` | 학습 코치 에이전트. 로드맵 안내 + 퀴즈 채점 + 진도 저장 |
+| `study_tools.py` | 코치가 쓰는 도구 (로드맵 보기, 주제 상세, 점수 저장, 다음 추천) |
+| `roadmap.json` | 배울 주제 목록. **내용을 직접 바꿔 쓰세요** (샘플: 파이썬 입문) |
+| `android-agent-design.md` | 📱 안드로이드 기기 제어 에이전트 **설계 문서** |
 | `requirements.txt` | 필요한 패키지 |
 | `.env.example` | API 키 설정 예시 |
 
@@ -103,6 +107,48 @@ SDK가 **함수 이름 · 타입 힌트 · docstring**을 읽어 Claude에게 �
 
 > ⚠️ 도구는 여러분의 컴퓨터에서 실제로 실행됩니다. 파일 삭제나 명령어 실행처럼 위험한 도구를 만들 때는 범위를 제한하세요.
 > (예: `tools.py`의 파일 도구는 `claude-agent` 폴더 밖을 읽지 못하게 막아 두었습니다.)
+
+## 4-1. 학습 코치 에이전트: `study_coach.py`
+
+같은 루프(`agent.py`의 `chat()`)에 **시스템 프롬프트와 도구만 바꿔 끼운** 두 번째 에이전트입니다.
+로드맵을 안내하고, 퀴즈를 내서 채점하고, 진도를 `progress.json`에 저장합니다.
+
+```bash
+python study_coach.py
+```
+
+```
+🎓 학습 코치입니다. '로드맵 보여줘' ...
+나> 오늘 뭐 배우면 돼?
+  🔧 도구 호출: suggest_next_topic({})
+Claude> 다음 추천 주제는 '변수와 자료형'이에요. 퀴즈를 내볼게요. 3.14는 무슨 자료형일까요?
+나> 실수요
+Claude> 정답! ... (3~5문제 후) 85점으로 통과입니다. 다음은 '조건문과 반복문'이에요.
+```
+
+**배울 주제는 `roadmap.json`에 들어 있습니다.** 코드와 분리돼 있어서, 이 파일만 바꾸면
+파이썬 말고 영어·자격증·무엇이든 학습 코치로 바꿀 수 있습니다. 구조는 이렇습니다.
+
+```json
+{
+  "title": "로드맵 제목",
+  "pass_score": 70,
+  "stages": [
+    { "name": "1단계", "topics": [
+      { "id": "unique-id", "title": "주제 이름",
+        "goals": ["학습 목표 1", "학습 목표 2"],
+        "resources": ["추천 자료 링크"] }
+    ]}
+  ]
+}
+```
+
+코치가 쓰는 도구(`study_tools.py`): `get_roadmap`(전체 진도), `get_topic`(주제 상세), `record_quiz_result`(점수 저장), `suggest_next_topic`(다음 추천). `progress.json`은 학습자마다 다른 기록이라 `.gitignore`에 들어 있습니다.
+
+## 4-2. 📱 안드로이드 기기 제어 에이전트 설계
+
+화면을 읽고 사람처럼 터치하는 안드로이드 에이전트의 **설계 문서**는 [`android-agent-design.md`](./android-agent-design.md)에 있습니다.
+접근성 서비스로 화면을 읽고, LLM이 "탭/스와이프" 도구를 호출하는 구조로, 이 폴더의 파이썬 루프와 같은 원리입니다. (자신의 기기에서 합법적인 범위로만 사용하세요.)
 
 ## 5. 내부 동작 이해하기: `manual_loop.py`
 

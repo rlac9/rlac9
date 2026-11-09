@@ -1,0 +1,94 @@
+{
+  "title": "파이썬 입문 학습 로드맵 (샘플)",
+  "pass_score": 70,
+  "stages": [
+    {
+      "id": 1,
+      "name": "1단계: 기초 문법",
+      "topics": [
+        {
+          "id": "variables",
+          "title": "변수와 자료형",
+          "goals": [
+            "정수, 실수, 문자열, 불리언 자료형 구분하기",
+            "변수에 값을 저장하고 출력하기(print)",
+            "type()로 자료형 확인하기",
+            "f-문자열로 값 끼워 넣기"
+          ],
+          "resources": [
+            "점프 투 파이썬 2장: https://wikidocs.net/book/1",
+            "변수 5개를 만들어 서로 다른 자료형을 담아 보기"
+          ]
+        },
+        {
+          "id": "control-flow",
+          "title": "조건문과 반복문",
+          "goals": [
+            "if / elif / else 로 분기하기",
+            "for 문으로 리스트 순회하기",
+            "while 문과 break, continue",
+            "range() 활용하기"
+          ],
+          "resources": [
+            "점프 투 파이썬 3장",
+            "1부터 100까지 중 짝수만 출력하는 프로그램 짜 보기"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "2단계: 자료 구조와 함수",
+      "topics": [
+        {
+          "id": "data-structures",
+          "title": "리스트·딕셔너리",
+          "goals": [
+            "리스트 추가/삭제/인덱싱/슬라이싱",
+            "딕셔너리 key-value 다루기",
+            "리스트 컴프리헨션 기초",
+            "언제 리스트와 딕셔너리를 쓰는지"
+          ],
+          "resources": [
+            "점프 투 파이썬 2장 (리스트/딕셔너리)",
+            "학생 이름과 점수를 딕셔너리로 저장해 보기"
+          ]
+        },
+        {
+          "id": "functions",
+          "title": "함수",
+          "goals": [
+            "def 로 함수 정의하기",
+            "매개변수와 반환값(return)",
+            "기본값 인자",
+            "함수를 작은 단위로 나누는 이유"
+          ],
+          "resources": [
+            "점프 투 파이썬 4장",
+            "이 저장소의 claude-agent/tools.py 에서 함수들이 어떻게 쓰였는지 읽어 보기"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "3단계: 실전",
+      "topics": [
+        {
+          "id": "files-and-modules",
+          "title": "파일과 모듈",
+          "goals": [
+            "open() 으로 파일 읽고 쓰기",
+            "import 로 모듈 가져오기",
+            "표준 라이브러리(json, pathlib) 맛보기",
+            "예외 처리(try/except)"
+          ],
+          "resources": [
+            "점프 투 파이썬 5장",
+            "이 폴더의 study_tools.py 가 json 파일을 어떻게 읽고 쓰는지 읽어 보기"
+          ]
+        }
+      ]
+    }
+  ]
+}
