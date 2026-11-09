@@ -28,7 +28,12 @@ SYSTEM_PROMPT = """당신은 친절한 한국어 도우미 에이전트입니다
 답변은 간결하고 이해하기 쉽게 작성하세요."""
 
 
-def run_turn(client: anthropic.Anthropic, history: list) -> str:
+def run_turn(
+    client: anthropic.Anthropic,
+    history: list,
+    system: str = SYSTEM_PROMPT,
+    tools: list = ALL_TOOLS,
+) -> str:
     """대화 기록(history)을 Claude에게 보내고, 도구 사용이 끝날 때까지 실행합니다.
 
     실행 중 오간 모든 메시지(Claude의 답변, 도구 결과)를 history에 추가하고
@@ -37,8 +42,8 @@ def run_turn(client: anthropic.Anthropic, history: list) -> str:
     runner = client.beta.messages.tool_runner(
         model=MODEL,
         max_tokens=16000,
-        system=SYSTEM_PROMPT,
-        tools=ALL_TOOLS,
+        system=system,
+        tools=tools,
         messages=list(history),
         output_config={"effort": "medium"},
         max_iterations=10,  # 도구 호출이 무한히 반복되지 않도록 제한
@@ -72,12 +77,17 @@ def run_turn(client: anthropic.Anthropic, history: list) -> str:
     return text or "(텍스트 답변 없음)"
 
 
-def main() -> None:
+def chat(
+    system: str = SYSTEM_PROMPT,
+    tools: list = ALL_TOOLS,
+    greeting: str = "🤖 Claude 에이전트입니다. 무엇이든 물어보세요! (종료: exit)",
+) -> None:
+    """터미널 대화 루프. 다른 에이전트(roadmap_agent.py 등)도 이 함수를 재사용합니다."""
     # API 키는 환경 변수 ANTHROPIC_API_KEY 에서 자동으로 읽습니다.
     client = anthropic.Anthropic()
     history: list = []
 
-    print("🤖 Claude 에이전트입니다. 무엇이든 물어보세요! (종료: exit)\n")
+    print(greeting + "\n")
     while True:
         try:
             user_input = input("나> ").strip()
@@ -93,7 +103,7 @@ def main() -> None:
         history.append({"role": "user", "content": user_input})
         saved_length = len(history) - 1
         try:
-            answer = run_turn(client, history)
+            answer = run_turn(client, history, system, tools)
         except anthropic.AuthenticationError:
             print("❌ API 키가 올바르지 않습니다. ANTHROPIC_API_KEY 환경 변수를 확인하세요.")
             sys.exit(1)
@@ -114,4 +124,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    chat()
